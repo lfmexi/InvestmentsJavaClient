@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lmyjo.client;
+package org.lmyjo.client.exceptions;
 
 /**
  *
  * @author luis
  */
-public class UnauthenticatedException extends Exception{
+public class LmyjoException extends Exception {
+
+    public LmyjoException() {
+    }
+
+    public LmyjoException(String message) {
+        super(message);
+    }
     
 }
