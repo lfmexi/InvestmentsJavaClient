@@ -7,8 +7,12 @@ package org.lmyjo.client;
 
 import java.util.Date;
 import java.util.List;
+import okhttp3.ResponseBody;
+import org.lmyjo.client.resources.OperationRequestBody;
 import org.lmyjo.client.resources.SessionResource;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -60,4 +64,26 @@ interface LmyjoService {
                                 @Field("name") String name,
                                 @Field("startingDate") Date startingDate,
                                 @Field("description") String description);
+    
+    @FormUrlEncoded
+    @PUT("/api/projects/{id}")
+    Call<Project> updateProject (@Header("Authorization") String authorization,
+                                @Path("id") String id,
+                                @Field("name") String name,
+                                @Field("startingDate") Date startingDate,
+                                @Field("description") String description);
+    
+    @DELETE("/api/projects/{id}")
+    Call<ResponseBody> deleteProject (@Header("Authorization") String authorization,
+                                  @Path("id") String id);
+    
+    @GET("/api/projects/{id}/operaciones")
+    Call<List<Operation>> getOperations (@Header("Authorization") String authorization,
+                                  @Path("id") String id);
+    
+    @FormUrlEncoded
+    @POST("/api/projects/{id}/operaciones")
+    Call<Operation> createOperation (@Header("Authorization") String authorization,
+                                  @Path("id") String id,
+                                  @Body OperationRequestBody body);
 }

@@ -30,7 +30,8 @@ public final class Client {
     }
     
     private void setService (String url) {
-        String baseUrl = (url != null)? url : SERVICE_PROTOCOL + "://" + SERVICE_URL;
+        String baseUrl = (url != null)? url : SERVICE_PROTOCOL + "://"
+                + SERVICE_URL;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -48,8 +49,8 @@ public final class Client {
         return ClientHolder.INSTANCE;
     }
    
-    public final Owner createOwner (String username, String email, 
-                                    String password) throws IOException, LmyjoException {
+    public final Owner createOwner (String username, String email, String password) 
+            throws IOException, LmyjoException {
         
         Call<Owner> call = this.service.createOwner(username, email, 
                                                             password);
@@ -73,7 +74,8 @@ public final class Client {
     
     public final Owner loginWithUsername (String username, String password) 
                                             throws IOException, LmyjoException {
-        Call<SessionResource> loginCall = this.service.loginWithUsername(username, password);
+        Call<SessionResource> loginCall = this.service
+                .loginWithUsername(username, password);
         
         Response<SessionResource> sessionResponse = loginCall.execute();
         
@@ -98,10 +100,12 @@ public final class Client {
 
                 return owner;
             }
-            throw this.throwNewException(ownerResponse.code(), ownerResponse.errorBody().string());
+            throw this.throwNewException(ownerResponse.code(), 
+                    ownerResponse.errorBody().string());
         }
         
-        throw this.throwNewException(sessionResponse.code(), sessionResponse.errorBody().string()); 
+        throw this.throwNewException(sessionResponse.code(), 
+                sessionResponse.errorBody().string()); 
     }
     
     LmyjoService getService() {
